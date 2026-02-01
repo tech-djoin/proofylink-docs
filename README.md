@@ -19,5 +19,5 @@ npm run build
 Setelah build selesai selanjutnya:
 
 ```bash
-npm run serve
+npm run start
 ```
