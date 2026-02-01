@@ -1,0 +1,91 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* ================================
+   THEME COLOR (PURPLE ONLY)
+   ================================ */
+:root {
+  /* Primary Purple */
+  --ifm-color-primary: #9333ea;
+  --ifm-color-primary-dark: #7e22ce;
+  --ifm-color-primary-darker: #6b21a8;
+  --ifm-color-primary-darkest: #581c87;
+  --ifm-color-primary-light: #a855f7;
+  --ifm-color-primary-lighter: #c084fc;
+  --ifm-color-primary-lightest: #e9d5ff;
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(147, 51, 234, 0.12);
+}
+
+/* Dark Mode */
+[data-theme='dark'] {
+  --ifm-color-primary: #c084fc;
+  --ifm-color-primary-dark: #a855f7;
+  --ifm-color-primary-darker: #9333ea;
+  --ifm-color-primary-darkest: #7e22ce;
+  --ifm-color-primary-light: #d8b4fe;
+  --ifm-color-primary-lighter: #e9d5ff;
+  --ifm-color-primary-lightest: #f3e8ff;
+
+  --docusaurus-highlighted-code-line-bg: rgba(216, 180, 254, 0.2);
+}
+
+/* HOMEPAGE HERO GRADIENT */
+
+.hero.hero--primary {
+    background: linear-gradient(
+    135deg,
+    #9333ea, 
+    #7e22ce, 
+    #db2777
+  );/* Lebih soft sedikit agar gradasi teks menonjol */
+}
+
+.hero.hero--primary h1, 
+.hero.hero--primary p {
+  color: #ffffff
+}
+
+/* .hero.hero--primary {
+  background: #f0eeff;
+}
+
+.hero.hero--primary h1 {
+  background: linear-gradient(
+    135deg,
+    #9333ea, 
+    #7e22ce, 
+    #db2777
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero.hero--primary p {
+  color: #4c1d95;
+} */
+
+.hero.hero--primary .button--secondary {
+  background-color: #ffffff;
+  color: #6d28d9;
+  font-weight: 700;
+  box-shadow: 0 4px 14px 0 rgba(109, 40, 217, 0.15);
+  transition: all 0.3s ease;
+}
+
+.hero.hero--primary .button--secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.25);
+  background-color: #ffffff;
+}
+
+.hidden-category {
+  display: none;
+}
+
+
