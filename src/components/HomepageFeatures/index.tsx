@@ -15,7 +15,7 @@ type FeatureItem = {
 const topFeatures: FeatureItem[] = [
   // { title: 'Personal', image: 'img/logo.png', link: "", description: 'For individual users and learners.' },
   // { title: 'Business', image: 'img/logo.png', link: "", description: 'For teams and growing companies.' },
-  { title: 'Perusahaan', image: 'img/logo.png', link: "/docs/category/enterprise" ,description: 'Solusi khusus untuk organisasi besar.' },
+  { title: 'Perusahaan', image: 'img/logo.png', link: "/docs/enterprise" ,description: 'Solusi khusus untuk organisasi besar.' },
 ];
 
 const apiFeature: FeatureItem = {
