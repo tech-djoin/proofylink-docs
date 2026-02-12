@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-# Endpoints
+# API Endpoints
 
 Gunakan endpoint berikut ini untuk mengelola proses verifikasi/screening individu.
 
@@ -33,24 +33,56 @@ Membuat permintaan verifikasi baru dengan metode persetujuan via email.
 
 **Response:**
 <Tabs>
-  <TabItem value="200" label={<span className="tab-200">200</span>}>
+  <TabItem value="201" label={<span className="tab-200">201 - Created</span>}>
   ```json
   {
       "status": "success",
       "message": "Verification created successfully.",
       "data": {
-          "reference_code": "EMP-260211-7874",
-          "status": "pending_consent",
-          "consent_method": "email",
-          "created_at": "2026-02-11T10:27:41.000000Z"
+        "reference_code": "EMP-260211-7874",
+        "status": "ocr_verification",
+        "consent_method": "email",
+        "created_at": "2026-02-11T10:27:41.000000Z"
       }
   }
   ```
   </TabItem>
-  <TabItem value="500" label={<span className="tab-500">500</span>}>
+  <TabItem value="400" label={<span className="tab-400">400 - Request Error</span>}>
   ```json
   {
     "status": "fail",
+    "message": "Insufficient token balance"
+  }
+  ```
+  </TabItem>
+  <TabItem value="404" label={<span className="tab-400">404 - Not Found</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "Data not found"
+  }
+  ```
+  </TabItem>
+  <TabItem value="422" label={<span className="tab-400">422 - Validation Error</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "id number harus berisi 16 karakter.",
+    "errors": {
+      "id_number": [
+          "id number harus berisi 16 karakter."
+      ],
+      "email": [
+          "Format email tidak valid."
+      ]
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
+  ```json
+  {
+    "status": "error",
     "message": "An error occurred while creating verification."
   }
   ```
@@ -83,24 +115,56 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
 
 **Response:**
 <Tabs>
-  <TabItem value="200" label={<span className="tab-200">200</span>}>
+  <TabItem value="201" label={<span className="tab-200">201 - Created</span>}>
   ```json
   {
-      "status": "success",
-      "message": "Verification created successfully.",
-      "data": {
-          "reference_code": "CAR-260211-7874",
-          "status": "pending_consent",
-          "consent_method": "signed_document",
-          "created_at": "2026-02-11T10:27:41.000000Z"
-      }
+    "status": "success",
+    "message": "Verification created successfully.",
+    "data": {
+      "reference_code": "EMP-260211-7874",
+      "status": "ocr_verification",
+      "consent_method": "signed_document",
+      "created_at": "2026-02-11T10:27:41.000000Z"
+    }
   }
   ```
   </TabItem>
-  <TabItem value="500" label={<span className="tab-500">500</span>}>
+  <TabItem value="400" label={<span className="tab-400">400 - Request Error</span>}>
   ```json
   {
     "status": "fail",
+    "message": "Insufficient token balance"
+  }
+  ```
+  </TabItem>
+  <TabItem value="404" label={<span className="tab-400">404 - Not Found</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "Data not found"
+  }
+  ```
+  </TabItem>
+  <TabItem value="422" label={<span className="tab-400">422 - Validation Error</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "id number harus berisi 16 karakter.",
+    "errors": {
+      "id_number": [
+          "id number harus berisi 16 karakter."
+      ],
+      "email": [
+          "Format email tidak valid."
+      ]
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
+  ```json
+  {
+    "status": "error",
     "message": "An error occurred while creating verification."
   }
   ```
@@ -128,24 +192,29 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
 
 **Response:**
 <Tabs>
-  <TabItem value="200" label={<span className="tab-200">200</span>}>
+  <TabItem value="200" label={<span className="tab-200">200 - Success</span>}>
   ```json
   {
     "status": "success",
     "message": "Verifications retrieved successfully.",
     "data": [
       {
-        "reference_code": "VER-260112-6389",
-        "status": "processing",
-        "final_decision": null,
-        "created_at": "2026-01-12T03:37:09.000000Z",
-        "updated_at": "2026-01-12T03:37:21.000000Z",
-        "score": null,
-        "credibility_score": null,
-        "credibility_level": null,
+        "reference_code": "EMP-260212-5406",
         "verification_type_name": "Rekrutment/Screening Karyawan",
-        "customer_name": "Customer 1",
-        "customer_id_number": "3201000000000001"
+        "status": "completed",
+        "customer_name": "MIRA SETIAWAN",
+        "customer_id_number": "3171********0123",
+        "final_decision": null,
+        "created_at": "2026-02-12T10:23:00.000000Z",
+        "updated_at": "2026-02-12T10:23:11.000000Z",
+        "credibility_score": 53,
+        "credibility_level": "D"
+      },
+      {
+        ...
+      },
+      {
+        ...
       }
     ],
     "links": {
@@ -158,26 +227,6 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
       "current_page": 1,
       "from": 1,
       "last_page": 1,
-      "links": [
-        {
-          "url": null,
-          "label": "&laquo; Previous",
-          "page": null,
-          "active": false
-        },
-        {
-          "url": "https://example.test/api/v1/external/verifications?page=1",
-          "label": "1",
-          "page": 1,
-          "active": true
-        },
-        {
-          "url": null,
-          "label": "Next &raquo;",
-          "page": null,
-          "active": false
-        }
-      ],
       "path": "https://example.test/api/v1/external/verifications",
       "per_page": 50,
       "to": 1,
@@ -187,7 +236,7 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
   }
   ```
   </TabItem>
-  <TabItem value="404" label={<span className="tab-400">400</span>}>
+  <TabItem value="404" label={<span className="tab-400">400 - Not Found</span>}>
   ```json
   {
     "status": "fail",
@@ -195,10 +244,10 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
   }
   ```
   </TabItem>
-  <TabItem value="500" label={<span className="tab-500">500</span>}>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
   ```json
   {
-    "status": "fail",
+    "status": "error",
     "message": "An error occurred while retrieving verification."
   }
   ```
@@ -225,47 +274,69 @@ Melihat detail verifikasi berdasarkan kode referensi.
 
 **Response:**
 <Tabs>
-  <TabItem value="200" label={<span className="tab-200">200</span>}>
+  <TabItem value="200" label={<span className="tab-200">200 - Success</span>}>
   ```json
   {
     "status": "success",
     "message": "Verification retrieved successfully.",
     "data": {
       "verification": {
-        "reference_code": "VER-260112-6389",
-        "status": "processing",
-        "final_decision": null,
+        "reference_code": "EMP-260212-5406",
+        "verification_type_name": "Rekrutment/Screening Karyawan",
+        "created_at": "2026-02-12T10:23:00.000000Z",
+        "updated_at": "2026-02-12T10:23:11.000000Z",
+        "status": "completed",
         "failed_message": null,
-        "score": null,
-        "reference_date": null,
-        "credibility_score": null,
-        "credibility_level": null,
-        "file_url": "https://storage.googleapis.com/proofylink-dev/reports/kredit/Laporan_CLIK_VER-260127-2072_1769496977.pdf?GoogleAccessId=gcs-proofylink-dev%40dev-sakti.iam.gserviceaccount.com&Expires=1770795190&Signature=VBfyFkOgY4nYJ3a78dFdZlU7BhM8DTo3uEW%2BGTbJAs1lpFPFe%2BUqtMLXBnebl%2Bku65HmdhYjE9ac2Q%2Bo351LBIH4JOYuwMVEnJUTkb4DtECcg4gcrDnwLzYHAQCKwzEi6becLPVgNNAR%2Bf5OYrUp%2Bh0hzCbZyvu70%2BkJ19RX8%2Fxv%2Frxgzt9h6PUtydRH5tuxcQTD6uUFos0fVekPrRMwW4VmZgooAr7hHrvP5BMarPv%2BTC8GNAomK97KTLb%2BWfUDr%2F6Ay3iMYYYy%2ByXxcP0Dn8LuZun5SjIHBNhcFU9TdSm7wmXDILGCi7L9gOdHsNw1H9THhyTDWhbj55R8AcSUgA%3D%3D",
-        "file_status": "completed",
-        "verification_type_name": null,
-        "created_at": "2026-01-12T03:37:09.000000Z",
-        "updated_at": "2026-01-12T03:37:21.000000Z"
+        "credibility_score": 53,
+        "credibility_level": "D",
+        "final_decision": null
       },
       "customer": {
-        "name": "Customer 1",
-        "phone": "081200000001",
-        "id_number": "3201000000000001",
-        "additional_data": {
-          "city": "Jakarta",
-          "address": "Jl. Customer No. 1",
-          "birth_date": "1990-01-01"
-        },
-        "ktp_url": "https://storage.googleapis.com/proofylink-dev/kyc/ktp/ktp_694b637222533.jpeg?GoogleAccessId=gcs-proofylink-dev%40dev-sakti.iam.gserviceaccount.com&Expires=1770795190&Signature=nUpVZKlK%2BIBcMY7ILTyJzg7nY6F6%2B73Y0lgUsZBU86OLWer809mN4qLl53mndSl82CHWxNqq7kVr8xdEJw88bbf4vtBaFwD6YcdREQtpxOAUj3tYYunIxUEU7ypG8EufHSK0cYtXVDOcmnesvg2Y1MESEOBGQDcJunaNuFJNDmTKRoa0qewm1kKUD7RIHNGDHfPU2NioZbH%2BNWRtAJA7zRkxJcnZBJL%2B63txipq23pki3xzAmCGcFSCy3hMht0Af8yQl%2FlccUWOc5cmgFk5UdPDEi93p8y0bwGQvzOBSV8bqBK9IVBJ0NBtpnFskhd5uL%2BDVmsCYaJcRmMtxtttHUw%3D%3D",
-        "selfie_with_ktp_url": "https://storage.googleapis.com/proofylink-dev/kyc/selfie/selfie_694b638fba14b.jpeg?GoogleAccessId=gcs-proofylink-dev%40dev-sakti.iam.gserviceaccount.com&Expires=1770795190&Signature=mMeUuwOmNGUBmSUxoJ1xcSCYJ1N%2FYwb8Q7AU5TTOpAdKYZXbKwehU8SMLo88ma0Pk8xL07VlsuluICVpSW9KBTCZrcNZ0SmSrPJ35QAzwegwE9Utr0vKWCptmuAbxMfbfsRetbYX8FJZcf0S7HZcPG1YGW%2Fb1qAuq%2FdknAxfo%2FRgoOMOe%2FlJWRlxFQT78Kh6UEPeS%2BtyAbmHVaM24KoJfAz7FBdweZNgjYZRpZwuo2j3nsJN2Ewxh5gfwFOlC%2BiKjJKW%2FmRvQyYNNHRMqbyPtN7SAxbwgAjEzn1ujYMoC4LmuSjL7IV6OnhlZ8YjYVJl19%2Bxa2Y3em29b97Wm4l3Iw%3D%3D",
-        "status": "verified",
-        "created_at": "2026-01-06T02:14:13.000000Z",
-        "updated_at": "2026-01-28T07:40:07.000000Z"
+        "name": "MIRA SETIAWAN",
+        "phone": "823423423423",
+        "id_number": "3171234567890123"
+      },
+      "analysis": {
+        "credit_summary": { object },
+        "credibility": { object },
+        "use_case_analysis": { object },
       }
     }
   }
   ```
   </TabItem>
-  <TabItem value="404" label={<span className="tab-400">400</span>}>
+  <TabItem value="201" label={<span className="tab-200">200 - Not Success</span>}>
+  ```json
+  {
+    "status": "success",
+    "message": "Verification retrieved successfully.",
+    "data": {
+      "verification": {
+        "reference_code": "EMP-260212-6843",
+        "verification_type_name": "Rekrutment/Screening Karyawan",
+        "created_at": "2026-02-12T10:14:51.000000Z",
+        "updated_at": "2026-02-12T10:15:01.000000Z",
+        "status": "failed",
+        "failed_message": OCR data mismatch,
+        "credibility_score": null,
+        "credibility_level": null,
+        "final_decision": null
+      },
+      "customer": {
+        "name": "MIRA SETIAWAN",
+        "phone": "823423423423",
+        "id_number": "3171234567890123"
+      },
+      "analysis": {
+        "credit_summary": null,
+        "credibility": null,
+        "use_case_analysis": null
+      }
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="404" label={<span className="tab-400">404 - Not Found</span>}>
   ```json
   {
     "status": "fail",
@@ -273,10 +344,10 @@ Melihat detail verifikasi berdasarkan kode referensi.
   }
   ```
   </TabItem>
-  <TabItem value="500" label={<span className="tab-500">500</span>}>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
   ```json
   {
-    "status": "fail",
+    "status": "error",
     "message": "An error occurred while retrieving verification."
   }
   ```

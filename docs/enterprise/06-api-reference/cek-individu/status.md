@@ -5,7 +5,7 @@ sidebar_position: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Status Permintaan Pengecekan
+# Daftar Status
 
 Status digunakan untuk memantau progres permintaan pengecekan yang diproses secara asynchronous. Setelah membuat request, kamu akan menerima `reference_code` dan bisa mengecek status permintaan menggunakan endpoint status berbasis `referencecode`.
 
