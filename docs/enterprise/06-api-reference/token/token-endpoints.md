@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Manajemen Token
 
-Gunakan endpoint ini untuk mengelola proses verifikasi data kandidat.
+Gunakan endpoint berikut ini untuk mengelola token anda.
 
 ## Saldo Token
 

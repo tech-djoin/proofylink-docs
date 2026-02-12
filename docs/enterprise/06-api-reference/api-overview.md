@@ -16,7 +16,7 @@ Semua request membutuhkan API key yang dikirim melalui header:
 
 API ini terdiri dari 2 kategori utama:
 
-### Verifications
+### Cek Data Individu
 
 Endpoints untuk mengelola proses verifikasi:
 - **Pengecekan Baru (Email Consent)** - Melakukan pengecekan dengan persetujuan subject via email

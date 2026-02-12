@@ -6,9 +6,108 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-# Verifications
+# Endpoints
 
-Gunakan endpoint ini untuk mengelola proses verifikasi data kandidat.
+Gunakan endpoint berikut ini untuk mengelola proses verifikasi/screening individu.
+
+## Cek Data Individu (Consent Digital)
+Membuat permintaan verifikasi baru dengan metode persetujuan via email.
+
+**Endpoint:**
+<span className="badge-http post">POST</span> `{{base_url}}/api/v1/external/verifications/email-consent`
+
+**Headers:**
+| Key | Value | Deskripsi |
+| :--- | :--- | :--- |
+| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
+
+**Body:**
+| Nama | Tipe Data | Contoh | Deskripsi |
+| :--- | :--- | :--- |  :--- |
+| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Test | Tipe Verifikasi / Screening |
+| id_number | string | 1234567890123456 | NIK (16 digit) |
+| full_name | string | John Doe | Nama Lengkap |
+| email | string | john.doe@gmail.com | Email |
+| phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
+| ktp_image | file | 1234567890123456 | Foto KTP dengan ukuran maksimal 4 MB |
+
+**Response:**
+<Tabs>
+  <TabItem value="200" label={<span className="tab-200">200</span>}>
+  ```json
+  {
+      "status": "success",
+      "message": "Verification created successfully.",
+      "data": {
+          "reference_code": "EMP-260211-7874",
+          "status": "pending_consent",
+          "consent_method": "email",
+          "created_at": "2026-02-11T10:27:41.000000Z"
+      }
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "An error occurred while creating verification."
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+---
+
+## Cek Data Individu (Consent Manual Upload)
+Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
+
+**Endpoint:**
+<span className="badge-http post">POST</span> `{{base_url}}/api/v1/external/verifications/upload-consent`
+
+**Headers:**
+| Key | Value | Deskripsi |
+| :--- | :--- | :--- |
+| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
+
+**Body:**
+| Nama | Tipe Data | Contoh | Deskripsi |
+| :--- | :--- | :--- |  :--- |
+| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Test | Tipe Verifikasi / Screening |
+| id_number | string | 1234567890123456 | NIK (16 digit) |
+| full_name | string | John Doe | Nama Lengkap |
+| email | string | john.doe@gmail.com | Email |
+| phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
+| ktp_image | file |  | Foto KTP dengan ukuran maksimal 4 MB |
+| form_consent | file |  | Form Consent dengan ukuran maksimal 10 MB |
+
+**Response:**
+<Tabs>
+  <TabItem value="200" label={<span className="tab-200">200</span>}>
+  ```json
+  {
+      "status": "success",
+      "message": "Verification created successfully.",
+      "data": {
+          "reference_code": "CAR-260211-7874",
+          "status": "pending_consent",
+          "consent_method": "signed_document",
+          "created_at": "2026-02-11T10:27:41.000000Z"
+      }
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "An error occurred while creating verification."
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+---
 
 ## Riwayat Cek
 
@@ -108,7 +207,7 @@ Gunakan endpoint ini untuk mengelola proses verifikasi data kandidat.
 
 ---
 
-## Get Verification Detail
+## Detail Hasil dan Analisa
 Melihat detail verifikasi berdasarkan kode referensi.
 
 **Endpoint:**
@@ -179,105 +278,6 @@ Melihat detail verifikasi berdasarkan kode referensi.
   {
     "status": "fail",
     "message": "An error occurred while retrieving verification."
-  }
-  ```
-  </TabItem>
-</Tabs>
-
----
-
-## Cek Data Individu (Consent Digital)
-Membuat permintaan verifikasi baru dengan metode persetujuan via email.
-
-**Endpoint:**
-<span className="badge-http post">POST</span> `{{base_url}}/api/v1/external/verifications/email-consent`
-
-**Headers:**
-| Key | Value | Deskripsi |
-| :--- | :--- | :--- |
-| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
-
-**Body:**
-| Nama | Tipe Data | Contoh | Deskripsi |
-| :--- | :--- | :--- |  :--- |
-| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Test | Tipe Verifikasi / Screening |
-| id_number | string | 1234567890123456 | NIK (16 digit) |
-| full_name | string | John Doe | Nama Lengkap |
-| email | string | john.doe@gmail.com | Email |
-| phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
-| ktp_image | file | 1234567890123456 | Foto KTP dengan ukuran maksimal 4 MB |
-
-**Response:**
-<Tabs>
-  <TabItem value="200" label={<span className="tab-200">200</span>}>
-  ```json
-  {
-      "status": "success",
-      "message": "Verification created successfully.",
-      "data": {
-          "reference_code": "EMP-260211-7874",
-          "status": "pending_consent",
-          "consent_method": "email",
-          "created_at": "2026-02-11T10:27:41.000000Z"
-      }
-  }
-  ```
-  </TabItem>
-  <TabItem value="500" label={<span className="tab-500">500</span>}>
-  ```json
-  {
-    "status": "fail",
-    "message": "An error occurred while creating verification."
-  }
-  ```
-  </TabItem>
-</Tabs>
-
----
-
-## Cek Data Individu (Consent Manual Upload)
-Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
-
-**Endpoint:**
-<span className="badge-http post">POST</span> `{{base_url}}/api/v1/external/verifications/upload-consent`
-
-**Headers:**
-| Key | Value | Deskripsi |
-| :--- | :--- | :--- |
-| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
-
-**Body:**
-| Nama | Tipe Data | Contoh | Deskripsi |
-| :--- | :--- | :--- |  :--- |
-| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Test | Tipe Verifikasi / Screening |
-| id_number | string | 1234567890123456 | NIK (16 digit) |
-| full_name | string | John Doe | Nama Lengkap |
-| email | string | john.doe@gmail.com | Email |
-| phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
-| ktp_image | file |  | Foto KTP dengan ukuran maksimal 4 MB |
-| form_consent | file |  | Form Consent dengan ukuran maksimal 10 MB |
-
-**Response:**
-<Tabs>
-  <TabItem value="200" label={<span className="tab-200">200</span>}>
-  ```json
-  {
-      "status": "success",
-      "message": "Verification created successfully.",
-      "data": {
-          "reference_code": "CAR-260211-7874",
-          "status": "pending_consent",
-          "consent_method": "signed_document",
-          "created_at": "2026-02-11T10:27:41.000000Z"
-      }
-  }
-  ```
-  </TabItem>
-  <TabItem value="500" label={<span className="tab-500">500</span>}>
-  ```json
-  {
-    "status": "fail",
-    "message": "An error occurred while creating verification."
   }
   ```
   </TabItem>
