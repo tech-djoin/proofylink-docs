@@ -15,7 +15,7 @@ type FeatureItem = {
 const topFeatures: FeatureItem[] = [
   // { title: 'Personal', image: 'img/logo.png', link: "", description: 'For individual users and learners.' },
   // { title: 'Business', image: 'img/logo.png', link: "", description: 'For teams and growing companies.' },
-  { title: 'Perusahaan', image: 'img/logo.png', link: "/docs/enterprise" ,description: 'Solusi khusus untuk organisasi besar.' },
+  { title: 'Perusahaan', image: 'img/logo.png', link: "/docs/enterprise" ,description: 'Aktivasi enterprise dan integrasi API untuk menghubungkan ProofyLink ke aplikasi Anda' },
 ];
 
 const apiFeature: FeatureItem = {
@@ -23,7 +23,7 @@ const apiFeature: FeatureItem = {
   image: 'img/logo.png',
   link: "/docs/enterprise/api-reference/api-overview",
   tag: 'DEVELOPER',
-  description: 'Integrasikan standarisasi tepercaya kami dengan mudah ke dalam alur kerja dan platform Anda yang sudah ada.',
+  description: 'Integrasikan standarisasi tepercaya kami dengan mudah ke dalam alur kerja dan platform Anda',
 };
 
 function Feature({title, image, description, link, tag, isFull}: FeatureItem & {isFull?: boolean}) {
@@ -57,7 +57,7 @@ export default function HomepageFeatures(): ReactNode {
 
         {/* GRID BAWAH - API (FULL WIDTH) */}
         <div className={styles.apiSection}>
-          <p className={styles.subHeading}>ALAT DEVELOPER</p>
+          <p className={styles.subHeading}>Untuk Developer</p>
           <div className={styles.apiGrid}> 
             <Feature {...apiFeature} /> 
           </div>
