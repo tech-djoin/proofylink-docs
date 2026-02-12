@@ -24,7 +24,7 @@ Membuat permintaan verifikasi baru dengan metode persetujuan via email.
 **Body:**
 | Nama | Tipe Data | Contoh | Deskripsi |
 | :--- | :--- | :--- |  :--- |
-| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Test | Tipe Verifikasi / Screening |
+| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Screening Sewa Mobil/Motor <br/> 3: Verifikasi Calon Pelanggan/Mitra <br/> 4: Screening Tenant (Kos/Kontrakan) | Tipe Verifikasi / Screening |
 | id_number | string | 1234567890123456 | NIK (16 digit) |
 | full_name | string | John Doe | Nama Lengkap |
 | email | string | john.doe@gmail.com | Email |
