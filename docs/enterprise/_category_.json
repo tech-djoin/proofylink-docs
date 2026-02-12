@@ -1,6 +1,6 @@
 {
-  "label": "Perusahaan",
-  "position": 2,
+  "label": "Perusahaan (Enterprise)",
+  "position": 3,
   "link": {
     "type": "generated-index"
 

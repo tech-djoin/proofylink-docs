@@ -2,46 +2,52 @@
 sidebar_position: 1
 ---
 
-# Intro
+# Tentang Proofylink
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Selamat datang di dokumentasi resmi **ProofyLink**.
 
-## Getting Started
+**ProofyLink** adalah platform berbasis web untuk bisnis yang ingin melakukan pengecekan individu secara cepat dan aman—agar pengambilan keputusan operasional jadi lebih terukur, terutama di proses yang rawan risiko seperti rekrutmen, sewa kendaraan, atau screening calon pelanggan (misalnya layanan internet/pascabayar). Release awal ProofyLink memang difokuskan untuk kebutuhan **enterprise**: perusahaan dapat mendaftar, melakukan aktivasi, lalu mulai menjalankan pengecekan sesuai kebutuhannya.
 
-Get started by **creating a new site**.
+## Untuk siapa ProofyLink?
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+ProofyLink dirancang untuk tim bisnis yang perlu melakukan verifikasi/penilaian sebelum memberikan akses layanan, aset, atau kontrak kepada seseorang.
 
-### What you'll need
+Contoh pengguna di perusahaan:
+- Tim HR/rekrutmen yang ingin mengurangi risiko di tahap hiring.
+- Tim operasional rental/leasing yang perlu memastikan proses screening berjalan konsisten.
+- Tim sales/credit/collection yang butuh sinyal tambahan saat onboarding pelanggan.
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Cara kerja singkat
 
-## Generate a new site
+Secara umum, ProofyLink dipakai dengan alur sederhana:
 
-Generate a new Docusaurus site using the **classic template**.
+1. Perusahaan membuat akun dan menyelesaikan aktivasi.
+2. Tim menjalankan pengecekan individu lewat dashboard web, atau sistem perusahaan memanggil API ProofyLink untuk otomatisasi.
+3. Hasil pengecekan muncul di dashboard (atau dikembalikan via API) untuk membantu proses operasional berikutnya.
 
-The classic template will automatically be added to your project after you run the command:
+## Manfaatkan ProofyLink
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Gunakan ProofyLink untuk membuat proses screening individu di bisnis anda jadi lebih cepat, konsisten, dan mudah ditelusuri. Cocok untuk kebutuhan seperti rekrutmen, sewa kendaraan, atau screening calon pelanggan—baik lewat dashboard web maupun lewat integrasi API untuk otomatisasi [file:5].
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## Output
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+Saat screening selesai, ProofyLink memberikan output yang bisa langsung dipakai untuk pengambilan keputusan operasional.
 
-## Start your site
+### Skor kredibilitas individu
 
-Run the development server:
+ProofyLink merangkum hasil pengecekan menjadi **skor kredibilitas** yang memudahkan tim melihat gambaran cepat tanpa harus membaca detail dari awal. Skor ini biasanya jadi “starting point” untuk menentukan apakah perlu lanjut verifikasi tambahan atau langsung lanjut proses berikutnya (misalnya interview lanjutan, approval sewa, atau aktivasi layanan).
 
-```bash
-cd my-website
-npm run start
-```
+### Analisa berdasarkan use case (tujuan screening)
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+Setiap screening punya konteks yang berbeda, jadi output ProofyLink juga menyesuaikan tujuan screening yang dipilih. Misalnya, kebutuhan rekrutmen cenderung fokus pada konsistensi dan pola risiko, sedangkan rental lebih fokus pada potensi masalah selama masa kontrak, dan screening calon pelanggan lebih fokus pada sinyal risiko onboarding dan kelancaran pembayaran.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+### Rekomendasi
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Selain skor dan analisa, ProofyLink menampilkan rekomendasi yang sifatnya praktis untuk membantu tim mengambil langkah berikutnya. Contohnya bisa berupa saran tindakan seperti “lanjutkan dengan syarat tertentu”, “minta dokumen tambahan”, atau “lakukan pengecekan ulang/eskalasi ke reviewer”, sehingga hasil screening tidak berhenti di angka saja.
+
+## Yang akan anda temukan di dokumentasi ini
+
+- Panduan mulai untuk perusahaan (registrasi, aktivasi, dan alur pengecekan).
+- Cara menggunakan dashboard web untuk menjalankan pengecekan dan melihat hasil.
+- Dokumentasi API (autentikasi, endpoint, best practice integrasi).
+- Catatan keamanan dan operasional (rate limit, idempotency, dan praktik integrasi yang aman).

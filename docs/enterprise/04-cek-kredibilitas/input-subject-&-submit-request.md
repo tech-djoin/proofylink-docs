@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Input Subject & Submit Request
+# Mulai Pengecekan Baru
 
 ## Persiapan Checklist
   - Subject data lengkap (nama, NIK, email, phone)

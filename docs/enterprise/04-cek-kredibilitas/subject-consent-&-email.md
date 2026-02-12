@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Subject Consent & Email Flow
+# Persetujuan Subject (Individu)
 
 ## Email yang Dikirim ke Subject
   - Subject: "ProofyLink Credit Check Request"

@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# API Credential Activation
+# Aktivasi Layanan Biro Kredit
 
 ## Submit Credential Request
   - Request form:

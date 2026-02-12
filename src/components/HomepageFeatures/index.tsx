@@ -15,13 +15,13 @@ type FeatureItem = {
 const topFeatures: FeatureItem[] = [
   // { title: 'Personal', image: 'img/logo.png', link: "", description: 'For individual users and learners.' },
   // { title: 'Business', image: 'img/logo.png', link: "", description: 'For teams and growing companies.' },
-  { title: 'Perusahaan', image: 'img/logo.png', link: "/docs/category/perusahaan" ,description: 'Solusi khusus untuk organisasi besar.' },
+  { title: 'Perusahaan', image: 'img/logo.png', link: "/docs/category/enterprise" ,description: 'Solusi khusus untuk organisasi besar.' },
 ];
 
 const apiFeature: FeatureItem = {
   title: 'Integrasi API',
   image: 'img/logo.png',
-  link: "/docs/category/open-api-reference-tech-docs",
+  link: "/docs/enterprise/api-reference/api-overview",
   tag: 'DEVELOPER',
   description: 'Integrasikan standarisasi tepercaya kami dengan mudah ke dalam alur kerja dan platform Anda yang sudah ada.',
 };

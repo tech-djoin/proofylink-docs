@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Overview Proses Cek
+# Alur Pengecekan
 
 ## High-level flow
   1. Tenant input subject data

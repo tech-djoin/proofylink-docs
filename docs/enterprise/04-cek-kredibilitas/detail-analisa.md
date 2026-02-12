@@ -1,8 +1,8 @@
 ---
-sidebar_position: 6
+sidebar_position: 4
 ---
 
-# Lihat Riwayat Pengecekan
+# Hasil Analisa
 
 
 ## Menu: Check History / Requests
