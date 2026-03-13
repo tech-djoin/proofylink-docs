@@ -10,8 +10,8 @@ import TabItem from '@theme/TabItem';
 
 Gunakan endpoint berikut ini untuk mengelola proses verifikasi/screening individu.
 
-## Cek Data Individu (Consent Digital)
-Membuat permintaan verifikasi baru dengan metode persetujuan via email.
+## Cek Data Individu (Consent Digital by Proofylink)
+Membuat permintaan verifikasi baru dengan metode persetujuan via email yang dikirimkan oleh aplikasi Proofylink.
 
 **Endpoint:**
 <span className="badge-http post">POST</span> `{{base_url}}/api/v1/external/verifications/email-consent`
@@ -29,7 +29,89 @@ Membuat permintaan verifikasi baru dengan metode persetujuan via email.
 | full_name | string | John Doe | Nama Lengkap |
 | email | string | john.doe@gmail.com | Email |
 | phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
-| ktp_image | file | 1234567890123456 | Foto KTP dengan ukuran maksimal 4 MB |
+| ktp_image | file | base64 | Foto KTP dengan ukuran maksimal 4 MB |
+
+**Response:**
+<Tabs>
+  <TabItem value="201" label={<span className="tab-200">201 - Created</span>}>
+  ```json
+  {
+      "status": "success",
+      "message": "Verification created successfully.",
+      "data": {
+        "reference_code": "EMP-260211-7874",
+        "status": "ocr_verification",
+        "consent_method": "email",
+        "created_at": "2026-02-11T10:27:41.000000Z"
+      }
+  }
+  ```
+  </TabItem>
+  <TabItem value="400" label={<span className="tab-400">400 - Request Error</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "Insufficient token balance"
+  }
+  ```
+  </TabItem>
+  <TabItem value="404" label={<span className="tab-400">404 - Not Found</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "Data not found"
+  }
+  ```
+  </TabItem>
+  <TabItem value="422" label={<span className="tab-400">422 - Validation Error</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "id number harus berisi 16 karakter.",
+    "errors": {
+      "id_number": [
+          "id number harus berisi 16 karakter."
+      ],
+      "email": [
+          "Format email tidak valid."
+      ]
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
+  ```json
+  {
+    "status": "error",
+    "message": "An error occurred while creating verification."
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+---
+
+## Cek Data Individu (Consent Digital by Mitra)
+Membuat permintaan verifikasi baru dengan persetujua digital yang telah dilampirkan oleh mitra.
+
+**Endpoint:**
+<span className="badge-http post">POST</span> `{{base_url}}/api/v1/external/verifications/own-consent`
+
+**Headers:**
+| Key | Value | Deskripsi |
+| :--- | :--- | :--- |
+| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
+
+**Body:**
+| Nama | Tipe Data | Contoh | Deskripsi |
+| :--- | :--- | :--- |  :--- |
+| verification_type_id | integer | 1: Rekrutment/Screening Karyawan <br/> 2: Screening Sewa Mobil/Motor <br/> 3: Verifikasi Calon Pelanggan/Mitra <br/> 4: Screening Tenant (Kos/Kontrakan) | Tipe Verifikasi / Screening |
+| id_number | string | 1234567890123456 | NIK (16 digit) |
+| full_name | string | John Doe | Nama Lengkap |
+| email | string | john.doe@gmail.com | Email |
+| phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
+| ktp_image | file | base64 | Foto KTP dengan ukuran maksimal 4 MB |
+| consent_metadata | array | &#123; "user_agent": "Mozilla/5.0", "ip_address": "192.168.1.1", "device_type": "desktop", "browser_info": "Chrome 145.0.0.0", "os": "Windows", "timestamp": "2026-03-06T16:00:00+08:00" &#125; | Keterangan metadata saat subject memberikan persetujuan melalui portal anda |
 
 **Response:**
 <Tabs>
@@ -110,8 +192,8 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
 | full_name | string | John Doe | Nama Lengkap |
 | email | string | john.doe@gmail.com | Email |
 | phone_number | string | 6289123456789 | Nomor telepon dengan prefix 62 |
-| ktp_image | file |  | Foto KTP dengan ukuran maksimal 4 MB |
-| form_consent | file |  | Form Consent dengan ukuran maksimal 10 MB |
+| ktp_image | file | base64 | Foto KTP dengan ukuran maksimal 4 MB |
+| form_consent | file | base64 | Form Consent dengan ukuran maksimal 10 MB |
 
 **Response:**
 <Tabs>
