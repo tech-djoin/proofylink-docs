@@ -171,8 +171,6 @@ Membuat permintaan verifikasi baru dengan persetujua digital yang telah dilampir
   </TabItem>
 </Tabs>
 
----
-
 ## Cek Data Individu (Consent Manual Upload)
 Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
 
@@ -252,8 +250,6 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
   ```
   </TabItem>
 </Tabs>
-
----
 
 ## Riwayat Cek
 
@@ -335,8 +331,6 @@ Membuat verifikasi dengan mengunggah dokumen persetujuan secara manual.
   ```
   </TabItem>
 </Tabs>
-
----
 
 ## Detail Hasil dan Analisa
 Melihat detail verifikasi berdasarkan kode referensi.
@@ -423,6 +417,141 @@ Melihat detail verifikasi berdasarkan kode referensi.
   {
     "status": "fail",
     "message": "Data not found.",
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
+  ```json
+  {
+    "status": "error",
+    "message": "An error occurred while retrieving verification."
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+---
+
+## Download Credit Report
+Mengunduh laporan kredit berdasarkan kode referensi verifikasi. Jika laporan belum pernah diunduh, request pertama akan mengembalikan response `200` dengan `status: "success"` dan `data.status: "processing"` yang menandakan laporan sedang dibuat. Lakukan request berikutnya setelah beberapa saat untuk mendapatkan link dokumen saat status laporan sudah `ready`. Link download report akan expired dalam 10 menit.
+
+**Endpoint:**
+<span className="badge-http get">GET</span> `{{base_url}}/api/v1/external/verifications/:reference_code/reports/credit`
+
+**Headers:**
+| Key | Value | Deskripsi |
+| :--- | :--- | :--- |
+| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
+| X-Timezone | Asia/Makassar | Zona waktu untuk memformat `expires_at` pada response. Jika tidak dikirimkan, `expires_at` menggunakan UTC |
+
+**Path Params:**
+| Nama | Tipe | Contoh | Deskripsi |
+| :--- | :--- | :--- | :--- |
+| reference_code | string | VER-260101-1234 | Kode referensi |
+
+**Response:**
+<Tabs>
+  <TabItem value="200" label={<span className="tab-200">200 - Success - Report Ready</span>}>
+  ```json
+  {
+    "status": "success",
+    "message": "Laporan berhasil diambil.",
+    "data": {
+      "status": "ready",
+      "url": "https://storage.googleapis.com/proofylink-dev/report-kredit/nae/GQShajL9/Laporan_NAE_VER-260101-1234_20260519_040605_GQShajL9.pdf?GoogleAccessId=gcs-proofylink-dev%40dev-sakti.iam.gserviceaccount.com&Expires=1779164334&Signature=lgDjDXRhibgrqJcaQrvpiY85%2B%2BafO2hqa9%2Fbo3HUwEx%2ByRzM%2F9%2BwuwGksz9gx2fU1yeWIz5bZQHxiskEvyKFB77cFrkWO3KEEmb3XVCcoXfFjmKKjDxAKHBYZPRl1a1CY%2BjzznMb951YN%2By6cK%2BRkQd833X1BEu9dzB0sn%2F2wab%2BCdyzzt3ptQdo2%2Bx7pkwKcHhu31udFrCSIjZ8%2BTzEfZPRYKGaz60P9AmY51DvH%2FoHDCH%2BVNrSAGksPSiuzT1E1N2TCPFBlXfJR56C2lhq7gYnc9OlVgfRaiV5Vvb8RWMtotvb9Gnr%2FHwzubOYyWueUJunXyu5xof6d%2BWCjB281g%3D%3D",
+      "expires_in": 600,
+      "expires_at": "2026-05-19T12:18:54+08:00"
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="200-processing" label={<span className="tab-200">200 - Success - Report Processing</span>}>
+  ```json
+  {
+    "status": "success",
+    "message": "Dokumen sedang diproses, silakan coba beberapa saat lagi.",
+    "data": {
+      "status": "processing",
+      "expires_at": null
+    },
+    "errors": {}
+  }
+  ```
+  </TabItem>
+  <TabItem value="404" label={<span className="tab-400">404 - Not Found</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "Verifikasi tidak ditemukan.",
+    "data": [],
+    "errors": {}
+  }
+  ```
+  </TabItem>
+  <TabItem value="500" label={<span className="tab-500">500 - Internal Error</span>}>
+  ```json
+  {
+    "status": "error",
+    "message": "An error occurred while retrieving verification."
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+---
+
+## Download Hasil Proofylink
+Mengunduh laporan hasil analisa Proofylink berdasarkan kode referensi verifikasi. Jika laporan belum pernah diunduh, request pertama akan mengembalikan response `200` dengan `status: "success"` dan `data.status: "processing"` yang menandakan laporan sedang dibuat. Lakukan request berikutnya setelah beberapa saat untuk mendapatkan link dokumen saat status laporan sudah `ready`. Link download report akan expired dalam 10 menit.
+
+**Endpoint:**
+<span className="badge-http get">GET</span> `{{base_url}}/api/v1/external/verifications/:reference_code/reports/proofylink`
+
+**Headers:**
+| Key | Value | Deskripsi |
+| :--- | :--- | :--- |
+| Authorization | Bearer YOUR_ACCESS_TOKEN | Token integrasi Proofylink |
+| X-Timezone | Asia/Makassar | Zona waktu untuk memformat `expires_at` pada response. Jika tidak dikirimkan, `expires_at` menggunakan UTC |
+
+**Path Params:**
+| Nama | Tipe | Contoh | Deskripsi |
+| :--- | :--- | :--- | :--- |
+| reference_code | string | VER-260101-1234 | Kode referensi |
+
+**Response:**
+<Tabs>
+  <TabItem value="200" label={<span className="tab-200">200 - Success - Report Ready</span>}>
+  ```json
+  {
+    "status": "success",
+    "message": "Laporan berhasil diambil.",
+    "data": {
+      "status": "ready",
+      "url": "https://storage.googleapis.com/proofylink-dev/report/laporan-kredit/analisa/Laporan_Proofylink_VER-260101-1234_1779161019.pdf?GoogleAccessId=gcs-proofylink-dev%40dev-sakti.iam.gserviceaccount.com&Expires=1779169853&Signature=JC3Z2sE%2F7SdNWRZye4TqHJKCylwyZhDADRvq18tLb6LZX8uTZVf6cbjnQ6XIJSWatCEnfAJQVAr%2B%2FIr0%2BHZU%2Bd1%2F249DbHEz5dtgwUDeTNwEVhK8gQA%2Bt1ibCQZVSuhCvvT9cox5kn9cSgcX2LiNJL3LOVDyAVGCWS7GhdQX1lkV6qKIHzJJFR%2BqeSIGsIZxFKo%2FuGZV0AdLlOR7jYFxgd4MEGNNcz5sNrEg0TdSaspAzUvDc5TaQarDXMZDItY0bi9%2FC2Fju10MdglIHHfyTbhJMwVyeoRFRJ4yItlM7WCy4VhhHza6O78hSlff2hxAxXeK0zaxniqdlLWqJB5XYg%3D%3D",
+      "expires_in": 600,
+      "expires_at": "2026-05-19T13:50:53+08:00"
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="200-processing" label={<span className="tab-200">200 - Success - Report Processing</span>}>
+  ```json
+  {
+    "status": "success",
+    "message": "Dokumen sedang diproses, silakan coba beberapa saat lagi.",
+    "data": {
+      "status": "processing",
+      "expires_at": null
+    }
+  }
+  ```
+  </TabItem>
+  <TabItem value="404" label={<span className="tab-400">404 - Not Found</span>}>
+  ```json
+  {
+    "status": "fail",
+    "message": "Verifikasi tidak ditemukan.",
+    "data": [],
+    "errors": {}
   }
   ```
   </TabItem>
